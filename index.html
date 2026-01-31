@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Reino - Servidor Minecraft</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Space+Grotesk:wght@300;400;600&family=Abril+Fatface&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="background-grid"></div>
+    <div class="floating-particles" id="particleContainer"></div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-dots">
+            <span class="dot active" data-section="0"></span>
+            <span class="dot" data-section="1"></span>
+            <span class="dot" data-section="2"></span>
+            <span class="dot" data-section="3"></span>
+        </div>
+    </div>
+    
+
+    
+    <aside class="sidebar sidebar-right" id="sidebarRight">
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <h3>CONTRIBUIDORES</h3>
+                <button class="sidebar-close" id="closeSidebar">×</button>
+            </div>
+            
+            <div class="contributors-list">
+                <div class="contributor-item owner">
+                    <div class="contributor-avatar">
+                        <span class="avatar-icon">👑</span>
+                    </div>
+                    <div class="contributor-info">
+                        <div class="contributor-name">Monarca</div>
+                        <div class="contributor-role">Owner</div>
+                        <div class="contributor-description">Dueño del servidor, tiene control total</div>
+                    </div>
+                    <div class="contributor-permissions">
+                        <span class="permission-badge owner-badge">OWNER</span>
+                        <span class="permission-badge no-op">No OP</span>
+                    </div>
+                </div>
+                
+                <div class="contributor-item">
+                    <div class="contributor-avatar">
+                        <span class="avatar-icon">🛡️</span>
+                    </div>
+                    <div class="contributor-info">
+                        <div class="contributor-name">HarryAf</div>
+                        <div class="contributor-role">Admin Principal</div>
+                        <div class="contributor-description">Representante principal, moderador y soporte técnico</div>
+                    </div>
+                    <div class="contributor-permissions">
+                        <span class="permission-badge admin-badge">ADMIN</span>
+                        <span class="permission-badge no-op">No OP</span>
+                        <span class="permission-badge mod-badge">MOD</span>
+                        <span class="permission-badge support-badge">SOPORTE</span>
+                    </div>
+                </div>
+                
+                <div class="contributor-item">
+                    <div class="contributor-avatar">
+                        <span class="avatar-icon">⚡</span>
+                    </div>
+                    <div class="contributor-info">
+                        <div class="contributor-name">Shukensha</div>
+                        <div class="contributor-role">Admin</div>
+                        <div class="contributor-description">Representante principal, moderador y soporte técnico</div>
+                    </div>
+                    <div class="contributor-permissions">
+                        <span class="permission-badge admin-badge">ADMIN</span>
+                        <span class="permission-badge no-op">No OP</span>
+                        <span class="permission-badge mod-badge">MOD</span>
+                        <span class="permission-badge support-badge">SOPORTE</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-icon">👑</span>
+                        <span>Owner</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">🛡️</span>
+                        <span>Admin</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">⚡</span>
+                        <span>Representante</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">🔨</span>
+                        <span>Moderador</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon">💬</span>
+                        <span>Soporte</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Main Container -->
+    <div class="sections-container" id="sectionsContainer">
+        
+        <!-- Section 1: Main Server Info -->
+        <section class="section section-main" data-section="0">
+            <div class="content-wrapper">
+                <header class="server-header">
+                    <h1 class="server-name">EL REINO</h1>
+                    <div class="server-version">v1.20.1 Forge</div>
+                </header>
+                
+                <main class="terminal-container">
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="btn close"></span>
+                                <span class="btn minimize"></span>
+                                <span class="btn maximize"></span>
+                            </div>
+                            <div class="terminal-title">system@elreino</div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-content" id="terminalContent">
+                                <div class="terminal-line">$ Iniciando sistema...</div>
+                                <div class="terminal-line">$ Cargando módulos del reino...</div>
+                                <div class="terminal-line">$ Verificando conexión...</div>
+                                <div class="terminal-line cursor-line">$ <span class="cursor"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                
+                <div class="scroll-hint">
+                    <div class="scroll-arrow"></div>
+                    <span>Desliza hacia abajo</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 2: Clock & Contribution -->
+        <section class="section section-contribute" data-section="1">
+            <div class="content-wrapper">
+                <div class="widgets-container">
+                    <!-- Digital Clock Widget -->
+                    <div class="widget clock-widget">
+                        <div class="widget-header">
+                            <h3>HORA ACTUAL</h3>
+                        </div>
+                        <div class="widget-content">
+                            <div class="digital-clock-display" id="digitalClockDisplay">
+                                <div class="time-segments">
+                                    <div class="time-segment hours" id="hoursDisplay">00</div>
+                                    <div class="time-separator">:</div>
+                                    <div class="time-segment minutes" id="minutesDisplay">00</div>
+                                    <div class="time-separator">:</div>
+                                    <div class="time-segment seconds" id="secondsDisplay">00</div>
+                                </div>
+                                <div class="date-display" id="dateDisplay">Lunes, 1 de Enero</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contribution Widget -->
+                    <div class="widget contribution-widget minimal">
+                        <div class="widget-content">
+                            <div class="discord-logo">
+                                <svg width="64" height="48" viewBox="0 0 71 55" fill="none">
+                                    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.1052 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.9049 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7395 52.5728 20.9464 50.6063 21.9607 48.5383C22.0212 48.4172 21.963 48.2688 21.8476 48.2256C19.8769 47.4931 18.0175 46.6046 16.2361 45.5858C16.1181 45.5152 16.1078 45.3477 16.2135 45.2643C16.5678 44.9894 16.9222 44.7034 17.2605 44.4132C17.326 44.3574 17.4182 44.3474 17.4934 44.3873C29.8691 50.1378 43.2108 50.1378 55.4714 44.3873C55.5466 44.3446 55.6388 44.3546 55.7043 44.4104C56.0426 44.7006 56.397 44.9894 56.7541 45.2643C56.8598 45.3477 56.8523 45.5152 56.7343 45.5858C54.9529 46.6197 53.0936 47.4931 51.1202 48.2228C51.0048 48.266 50.9466 48.4172 51.0071 48.5383C52.0439 50.6034 53.2508 52.5699 54.6014 54.4349C54.6575 54.5139 54.7581 54.5477 54.8505 54.5195C60.6543 52.7249 66.537 50.0174 72.6099 45.5576C72.6629 45.5182 72.6966 45.459 72.7022 45.3942C74.1849 29.9796 70.3059 16.6804 60.1045 4.9795C60.0849 4.9429 60.0513 4.9147 60.1045 4.8978ZM24.3632 37.7249C20.7646 37.7249 17.8156 34.4697 17.8156 30.4534C17.8156 26.4371 20.7121 23.1819 24.3632 23.1819C28.0419 23.1819 30.9635 26.4653 30.9075 30.4534C30.9075 34.4697 28.011 37.7249 24.3632 37.7249ZM46.6261 37.7249C43.0275 37.7249 40.0785 34.4697 40.0785 30.4534C40.0785 26.4371 42.975 23.1819 46.6261 23.1819C50.3048 23.1819 53.2264 26.4653 53.1704 30.4534C53.1704 34.4697 50.3048 37.7249 46.6261 37.7249Z" fill="#5865F2"/>
+                                </svg>
+                            </div>
+                            <p class="minimal-text">Únete al Discord</p>
+                            <button class="minimal-btn" id="discordBtn">
+                                <span class="btn-arrow">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-hints">
+                    <div class="nav-hint up">
+                        <span>↑</span>
+                        <span>Arriba</span>
+                    </div>
+                    <div class="nav-hint down">
+                        <span>↓</span>
+                        <span>Abajo</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 3: Calendar -->
+        <section class="section section-calendar" data-section="2">
+            <div class="content-wrapper">
+                <div class="calendar-container">
+                    <div class="widget calendar-widget">
+                        <div class="widget-header">
+                            <h3>FECHA DE CREACIÓN</h3>
+                        </div>
+                        <div class="widget-content">
+                            <div class="calendar-sheet">
+                                <div class="calendar-month">ENERO</div>
+                                <div class="calendar-day">31</div>
+                                <div class="calendar-year">2024</div>
+                            </div>
+                            <p class="calendar-description">El día que nació El Reino</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-hints">
+                    <div class="nav-hint up">
+                        <span>↑</span>
+                        <span>Arriba</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: Rules -->
+        <section class="section section-rules" data-section="3">
+            <div class="content-wrapper">
+                <div class="rules-container">
+                    <div class="widget rules-widget">
+                        <div class="widget-header">
+                            <h3>LEYENDAS DEL REINO</h3>
+                        </div>
+                        <div class="widget-content">
+                            <div class="rules-intro">
+                                <p class="rules-philosophy">Este es un servidor anárquico donde la libertad es primordial. Sin embargo, existen ciertas conductas que degradan la experiencia para otros jugadores y serán castigadas.</p>
+                            </div>
+                            
+                            <div class="rules-categories">
+                                <div class="rule-category">
+                                    <div class="category-header">
+                                        <span class="category-icon">⚔️</span>
+                                        <h4>COMPORTAMIENTO MALICIOSO</h4>
+                                    </div>
+                                    <div class="rule-items">
+                                        <div class="rule-item">
+                                            <span class="rule-name">Griefing con abandono</span>
+                                            <span class="rule-penalty">Baneo 1 mes + pérdida de items</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">Suplantación de identidad</span>
+                                            <span class="rule-penalty">Baneo permanente</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">Amenazas reales</span>
+                                            <span class="rule-penalty">Baneo permanente + report</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="rule-category">
+                                    <div class="category-header">
+                                        <span class="category-icon">🤖</span>
+                                        <h4>HACKS PROHIBIDOS</h4>
+                                    </div>
+                                    <div class="rule-items">
+                                        <div class="rule-item">
+                                            <span class="rule-name">Kill Aura / Reach</span>
+                                            <span class="rule-penalty">Baneo 2 semanas</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">Auto-Totem / Crystal Aura</span>
+                                            <span class="rule-penalty">Baneo 2 semanas</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">Fly / Speed (PVP)</span>
+                                            <span class="rule-penalty">Baneo 1 semana</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">X-Ray (recursos)</span>
+                                            <span class="rule-penalty">Baneo 1 mes</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="rule-category">
+                                    <div class="category-header">
+                                        <span class="category-icon">🌐</span>
+                                        <h4>RENDIMIENTO DEL SERVIDOR</h4>
+                                    </div>
+                                    <div class="rule-items">
+                                        <div class="rule-item">
+                                            <span class="rule-name">Generación de lag intencional</span>
+                                            <span class="rule-penalty">Baneo 2 semanas</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">Redstone excesiva (lag)</span>
+                                            <span class="rule-penalty">Advertencia → eliminación</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">Entidades masivas</span>
+                                            <span class="rule-penalty">Advertencia → limpieza</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="rule-category">
+                                    <div class="category-header">
+                                        <span class="category-icon">💎</span>
+                                        <h4>HACKS PERMITIDOS</h4>
+                                    </div>
+                                    <div class="rule-items">
+                                        <div class="rule-item">
+                                            <span class="rule-name">Minimap (sin jugadores)</span>
+                                            <span class="rule-penalty">Permitido</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">OptiFine / FPS boost</span>
+                                            <span class="rule-penalty">Permitido</span>
+                                        </div>
+                                        <div class="rule-item">
+                                            <span class="rule-name">Utilidad / Cosméticos</span>
+                                            <span class="rule-penalty">Permitido</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="rules-footer">
+                                <div class="anarchy-note">
+                                    <span class="note-icon">🏴</span>
+                                    <p><strong>Nota importante:</strong> Esta lista no es exhaustiva. Cualquier comportamiento que afecte negativamente la experiencia de otros jugadores será evaluado y castigado según la discreción de la administración.</p>
+                                </div>
+                                <div class="disclaimer">
+                                    <p>La administración se reserva el derecho de modificar estas reglas en cualquier momento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-hints">
+                    <div class="nav-hint up">
+                        <span>↑</span>
+                        <span>Arriba</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
